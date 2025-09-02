@@ -85,19 +85,26 @@ const Game = () => {
     <div className="flex flex-col items-center justify-center min-h-screen bg-grey-100 p-4">
       <h1 className="text-3xl font-bold mb-6">Memory Game</h1>
       {/* Input */}
-      <div className="mb-4">
+      {/* Size Controls */}
+      <div className="mb-4 flex items-center space-x-2">
         <label htmlFor="gridSize" className="mr-2">
           Size:
         </label>
-        <input
-          type="number"
-          id="gridSize"
-          min="2"
-          max="10"
-          value={gridSize}
-          onChange={handleGridSizeChange}
-          className="border-2 border-gray-300 rounded px-2 py-1"
-        />
+        <button
+          onClick={() => setGridSize(prev => Math.max(2, prev - 1))}
+          className="w-8 h-8 rounded bg-gray-300 hover:bg-gray-400 flex items-center justify-center text-sm"
+          disabled={gridSize <= 2}
+        >
+          −
+        </button>
+        <span className="w-12 text-center font-medium">{gridSize}</span>
+        <button
+          onClick={() => setGridSize(prev => Math.min(10, prev + 1))}
+          className="w-8 h-8 rounded bg-gray-300 hover:bg-gray-400 flex items-center justify-center text-sm"
+          disabled={gridSize >= 10}
+        >
+          +
+        </button>
       </div>
 
       {/* Game Board */}

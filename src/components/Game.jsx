@@ -9,6 +9,7 @@ const Game = () => {
   const [disabled, setDisabled] = useState(false);
 
   const [won, setWon] = useState(false);
+  const [failedAttempts, setFailedAttempts] = useState(0);
 
   const handleGridSizeChange = (e) => {
     const size = parseInt(e.target.value);
@@ -28,6 +29,7 @@ const Game = () => {
     setFlipped([]);
     setSolved([]);
     setWon(false);
+    setFailedAttempts(0);
   };
 
   useEffect(() => {
@@ -41,6 +43,7 @@ const Game = () => {
       setFlipped([]);
       setDisabled(false);
     } else {
+      setFailedAttempts(prev => prev + 1);
       setTimeout(() => {
         setFlipped([]);
         setDisabled(false);
@@ -229,6 +232,12 @@ const Game = () => {
         </div>
       )}
 
+      {/* Failed Attempts Counter */}
+      {failedAttempts > 0 && (
+        <div className="mt-2 text-lg text-red-600 font-medium animate-bounce-once">
+          Failed Attempts: {failedAttempts}
+        </div>
+      )}
       {/* Reset / Play Again Btn */}
       <button
         onClick={initializeGame}

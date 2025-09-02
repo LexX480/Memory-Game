@@ -1,5 +1,6 @@
 import React from 'react'
-import Game from './components/game'
+import Game from './components/Game'
+
 
 const App = () => {
   return <Game />
